@@ -116,6 +116,18 @@ async def test_signal_check_unknown_drug():
 
 
 @respx.mock
+async def test_signal_check_unknown_reaction():
+    def respond(request):
+        s = request.url.params.get("search") or ""
+        n = 0 if "reactionmeddrapt" in s else 20_000_000 if not s else 46_000
+        return httpx.Response(200, json=total(n))
+
+    respx.get(f"{FDA}/drug/event.json").mock(side_effect=respond)
+    out = await call("signal_check", {"drug": "exampleglutide", "reaction": "pancreatitus"})
+    assert "MedDRA" in out["error"] and "disproportionality" not in out
+
+
+@respx.mock
 async def test_recalls():
     respx.get(f"{FDA}/drug/enforcement.json").mock(
         return_value=httpx.Response(200, json=fx("recalls.json"))
@@ -153,23 +165,43 @@ async def test_input_validation_returns_errors():
 
 
 @respx.mock
-async def test_retry_then_cache():
+async def test_retry_then_cache(monkeypatch):
     route = respx.get(f"{FDA}/drug/enforcement.json").mock(
         side_effect=[httpx.Response(503), httpx.Response(200, json=fx("recalls.json"))]
     )
     client = ApiClient(FDA, min_interval_s=0)
     fda = OpenFDA(client)
-    import pharma_mcp.http as h
+    slept: list[float] = []
 
-    async def no_sleep(_s):
-        return None
+    async def no_sleep(s):
+        slept.append(s)
 
-    orig = h.asyncio.sleep
-    h.asyncio.sleep = no_sleep
-    try:
-        first = await fda.recalls("x")
-        second = await fda.recalls("x")
-    finally:
-        h.asyncio.sleep = orig
+    monkeypatch.setattr("pharma_mcp.http.asyncio.sleep", no_sleep)
+    first = await fda.recalls("x")
+    second = await fda.recalls("x")
     assert first == second and route.call_count == 2  # one retry, then served from cache
+    await client.aclose()
+
+
+@pytest.mark.parametrize(
+    ("retry_after", "expected"),
+    [("2", 2.0), ("99999", 30.0), ("Wed, 21 Oct 2026 07:28:00 GMT", 1.0)],
+)
+@respx.mock
+async def test_retry_after_is_parsed_and_capped(monkeypatch, retry_after, expected):
+    respx.get(f"{FDA}/x.json").mock(
+        side_effect=[
+            httpx.Response(429, headers={"Retry-After": retry_after}),
+            httpx.Response(200, json={"ok": 1}),
+        ]
+    )
+    slept: list[float] = []
+
+    async def fake_sleep(s):
+        slept.append(s)
+
+    monkeypatch.setattr("pharma_mcp.http.asyncio.sleep", fake_sleep)
+    client = ApiClient(FDA, min_interval_s=0)
+    assert await client.get("/x.json") == {"ok": 1}
+    assert slept == [expected]
     await client.aclose()

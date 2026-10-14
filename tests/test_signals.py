@@ -36,3 +36,20 @@ def test_zero_cells_are_safe():
     s = disproportionality(0, 100, 50, 1000)
     assert s.prr is None and s.ror is None and not s.is_signal
     assert chi2_yates(0, 0, 0, 0) is None
+
+
+def test_zero_cell_uses_haldane_correction():
+    # only this drug reports the reaction (c=0): still a finite PRR and a flagged signal
+    s = disproportionality(5, 95, 0, 10**7)
+    assert s.prr is not None and s.prr > 2 and s.is_signal
+    assert s.c == 0  # reported counts stay uncorrected
+    s = disproportionality(3, 0, 10, 1000)  # b=0: ROR is reported too
+    assert s.ror is not None and s.ror_ci is not None
+
+
+def test_query_quoting_strips_escape_characters():
+    from pharma_mcp.openfda import _q
+
+    assert _q('a\\" OR x  b') == '"a OR x b"'
+    with pytest.raises(ValueError):
+        _q(' \\" ')

@@ -20,8 +20,8 @@ FAERS_NOTE = (
 
 
 def _q(value: str) -> str:
-    """Quote a search term for openFDA (escape quotes, collapse spaces)."""
-    v = re.sub(r"\s+", " ", value.strip()).replace('"', "")
+    """Quote a search term for openFDA (drop quotes and backslashes, collapse spaces)."""
+    v = re.sub(r"\s+", " ", re.sub(r'[\\"]', "", value)).strip()
     if not v:
         raise ValueError("search term is empty")
     return f'"{v}"'
@@ -119,7 +119,8 @@ class OpenFDA:
 
     async def signal(self, drug: str, reaction: str) -> dict[str, Any]:
         d = f"patient.drug.medicinalproduct:{_q(drug)}"
-        e = f"patient.reaction.reactionmeddrapt:{_q(reaction)}"
+        # .exact matches one MedDRA term, the same field get_adverse_events counts
+        e = f"patient.reaction.reactionmeddrapt.exact:{_q(reaction.upper())}"
         drug_event = await self._total("/drug/event.json", f"{d} AND {e}")
         drug_total = await self._total("/drug/event.json", d)
         event_total = await self._total("/drug/event.json", e)
@@ -136,6 +137,11 @@ class OpenFDA:
         }
         if drug_total == 0:
             result["error"] = f"no FAERS reports found for {drug!r}; try the generic name"
+            return result
+        if event_total == 0:
+            result["error"] = (
+                f"no FAERS reports found for reaction {reaction!r}; use a MedDRA preferred term"
+            )
             return result
         a, b, c, dd = table(drug_event, drug_total, event_total, all_reports)
         result["disproportionality"] = disproportionality(a, b, c, dd).to_dict()

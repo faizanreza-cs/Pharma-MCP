@@ -40,6 +40,9 @@ table
 and computes PRR = [a/(a+b)] / [c/(c+d)] and ROR = ad/bc, with log-normal 95% confidence
 intervals and a Yates-corrected chi-squared. A pair is flagged when **PRR ≥ 2, χ² ≥ 4 and at
 least 3 cases** (Evans et al., 2001), the screening rule used in pharmacovigilance practice.
+When a reaction is reported only for this drug (a zero cell), PRR and ROR use the
+Haldane-Anscombe correction (+0.5 per cell), so it can still be flagged. Reactions are
+matched as exact MedDRA terms, the same terms `get_adverse_events` lists.
 
 > FAERS holds voluntary reports. A signal is a statistical association that deserves review,
 > not proof that the drug causes the event. The server's instructions tell the assistant to
@@ -84,9 +87,10 @@ Get one free at https://open.fda.gov/apis/authentication/.
 - **Validated inputs:** NCT id format, trial status and phase enums, empty search terms. Bad
   input returns a clear error message to the model, not an exception.
 - **Compact outputs:** long label sections are trimmed so they don't flood the context window.
-- **Tests:** 15, all offline. Signal math is checked against hand-computed values. Every tool
-  is exercised end to end through a real MCP client against mocked HTTP. Retries and caching
-  are covered. CI runs on Python 3.11 to 3.13, plus a Docker build and handshake check.
+- **Tests:** 21, all offline. Signal math is checked against hand-computed values,
+  including zero-cell cases. Every tool is exercised end to end through a real MCP client
+  against mocked HTTP. Retries, `Retry-After` parsing, caching and query escaping are covered.
+  CI runs on Python 3.11 to 3.13, plus a Docker build and handshake check.
 
 The test fixtures are hand-made samples in the documented response shapes, not real data
 (see `tests/fixtures/README.md`).

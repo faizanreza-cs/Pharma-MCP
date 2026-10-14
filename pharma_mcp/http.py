@@ -14,6 +14,9 @@ from typing import Any
 
 import httpx
 
+MAX_RETRY_AFTER_S = 30.0
+MAX_CACHE_ENTRIES = 1024
+
 
 class NotFound(Exception):
     """The API answered 'no matching records'. Callers turn this into an empty result."""
@@ -76,13 +79,19 @@ class ApiClient:
             if r.status_code == 404:
                 raise NotFound(path)
             if r.status_code in (429, 500, 502, 503, 504) and attempt < self.retries:
-                retry_after = r.headers.get("retry-after")
-                await asyncio.sleep(float(retry_after) if retry_after else delay)
+                try:  # Retry-After may also be an HTTP date; cap long waits
+                    wait = min(float(r.headers["retry-after"]), MAX_RETRY_AFTER_S)
+                except (KeyError, ValueError):
+                    wait = delay
+                await asyncio.sleep(wait)
                 delay *= 2
                 continue
             if r.status_code >= 400:
                 raise UpstreamError(f"HTTP {r.status_code}: {r.text[:200]}")
             data = r.json()
+            self._cache.pop(key, None)
+            if len(self._cache) >= MAX_CACHE_ENTRIES:  # dicts keep insertion order: drop oldest
+                self._cache.pop(next(iter(self._cache)))
             self._cache[key] = (time.monotonic(), data)
             return data
         raise UpstreamError("retries exhausted")
