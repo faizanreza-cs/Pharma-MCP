@@ -2,6 +2,7 @@
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/img/logo-dark.svg">
+  
   <img src="docs/img/logo.svg" alt="Pharma MCP" height="100">
 </picture>
 
@@ -12,12 +13,12 @@
 ![MCP](https://img.shields.io/badge/MCP-server-6f42c1)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2)](https://www.linkedin.com/in/YOUR-LINKEDIN-ID)
-[![X](https://img.shields.io/badge/X-Follow-000000?logo=x&logoColor=white)](https://x.com/cs_faizan)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2)](https://www.linkedin.com/in/faizanreza)
+[![X](https://img.shields.io/badge/Follow-000000?logo=x&logoColor=white)](https://x.com/cs_faizan)
 
 </div>
 
-## ⚡ Overview
+# ⚡ Overview
 
 Ask your assistant *"What are the most reported adverse events for semaglutide, and is
 pancreatitis disproportionately reported?"* or *"Find recruiting phase 3 trials for type 2
