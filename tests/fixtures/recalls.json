@@ -1,0 +1,6 @@
+{"meta": {"results": {"total": 1}},
+ "results": [{"recall_number": "D-0001-2026", "classification": "Class II", "status": "Ongoing",
+              "reason_for_recall": "Subpotent drug (sample text).",
+              "product_description": "Exampleglutide injection, 2 mg/1.5 mL pen (sample)",
+              "recalling_firm": "Sample Pharma Inc.", "recall_initiation_date": "20260301",
+              "report_date": "20260315"}]}

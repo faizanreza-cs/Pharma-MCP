@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: |
+          uv venv --allow-existing .venv
+          uv pip install --python .venv/bin/python -e ".[dev]"
+      - run: make lint
+      - run: make test
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t pharma-mcp .
+      - name: Smoke test (stdio handshake)
+        run: |
+          docker run --rm pharma-mcp python -c "
+          import asyncio
+          from mcp import Client
+          from pharma_mcp.server import mcp
+          async def main():
+              async with Client(mcp) as c:
+                  names = [t.name for t in (await c.list_tools()).tools]
+                  assert 'signal_check' in names, names
+                  print(names)
+          asyncio.run(main())"

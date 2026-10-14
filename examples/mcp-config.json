@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "pharma": {
+      "command": "uvx",
+      "args": ["--from", "git+https://github.com/faizanreza-cs/pharma-mcp", "pharma-mcp"],
+      "env": { "OPENFDA_API_KEY": "optional-your-key" }
+    }
+  }
+}

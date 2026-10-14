@@ -1,0 +1,16 @@
+{"totalCount": 1,
+ "studies": [{"protocolSection": {
+   "identificationModule": {"nctId": "NCT00000001", "briefTitle": "Sample Study of Exampleglutide in Type 2 Diabetes"},
+   "statusModule": {"overallStatus": "RECRUITING", "startDateStruct": {"date": "2026-01"},
+                    "primaryCompletionDateStruct": {"date": "2027-06"}},
+   "designModule": {"phases": ["PHASE3"], "enrollmentInfo": {"count": 600}},
+   "sponsorCollaboratorsModule": {"leadSponsor": {"name": "Sample Pharma Inc."}},
+   "conditionsModule": {"conditions": ["Type 2 Diabetes"]},
+   "armsInterventionsModule": {"interventions": [{"name": "Exampleglutide"}, {"name": "Placebo"}]},
+   "contactsLocationsModule": {"locations": [{"city": "Boston"}, {"city": "Delhi"}]},
+   "descriptionModule": {"briefSummary": "A sample summary."},
+   "eligibilityModule": {"eligibilityCriteria": "Inclusion: adults 18-75 with HbA1c 7-10.5% (sample).",
+                         "sex": "ALL", "minimumAge": "18 Years", "maximumAge": "75 Years",
+                         "healthyVolunteers": false},
+   "outcomesModule": {"primaryOutcomes": [{"measure": "Change in HbA1c at week 26"}]}
+ }}]}
