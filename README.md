@@ -1,12 +1,23 @@
-# pharma-mcp
+<div align="center">
 
-**An MCP server that gives AI assistants FDA drug labels, adverse event reports (FAERS),
-recalls and ClinicalTrials.gov, plus pharmacovigilance signal detection.**
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/img/logo-dark.svg">
+  <img src="docs/img/logo.svg" alt="Pharma MCP" height="100">
+</picture>
+
+<p><em>FDA drug labels, adverse event reports, recalls and ClinicalTrials.gov for any AI assistant, plus pharmacovigilance signal detection.</em></p>
 
 [![CI](https://github.com/faizanreza-cs/pharma-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/faizanreza-cs/pharma-mcp/actions/workflows/ci.yml)
 ![Python](https://img.shields.io/badge/python-3.11%20%7C%203.12%20%7C%203.13-blue)
 ![MCP](https://img.shields.io/badge/MCP-server-6f42c1)
 ![License](https://img.shields.io/badge/license-MIT-green)
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2)](https://www.linkedin.com/in/YOUR-LINKEDIN-ID)
+[![X](https://img.shields.io/badge/X-Follow-000000?logo=x&logoColor=white)](https://x.com/YOUR_X_HANDLE)
+
+</div>
+
+## ⚡ Overview
 
 Ask your assistant *"What are the most reported adverse events for semaglutide, and is
 pancreatitis disproportionately reported?"* or *"Find recruiting phase 3 trials for type 2
@@ -94,30 +105,6 @@ Get one free at https://open.fda.gov/apis/authentication/.
 
 The test fixtures are hand-made samples in the documented response shapes, not real data
 (see `tests/fixtures/README.md`).
-
-```
-pharma_mcp/
-  server.py    MCP tools + prompt (stdio / HTTP)
-  openfda.py   labels, FAERS counts, signal queries, recalls
-  trials.py    ClinicalTrials.gov v2 search + detail
-  signals.py   PRR / ROR / chi-squared, Evans rule
-  http.py      cache, rate limiting, retries
-```
-
-## Roadmap
-
-- Bayesian signal scores (EBGM / IC) alongside PRR and ROR
-- Time-to-onset and reporter-type breakdowns
-- DailyMed SPL section search and label change history
-- EMA EudraVigilance and WHO VigiAccess sources
-
-## Need healthcare data connected to your AI tools?
-
-I build MCP servers and AI integrations for pharma, biotech and healthcare teams: internal
-data warehouses, safety databases, CTMS, CRM, literature search. Every one gets the same
-attention to correctness and compliance as this project.
-
-**Faizan Reza**, AI engineer · [GitHub](https://github.com/faizanreza-cs) · faizanreza01@gmail.com
 
 ## License
 
