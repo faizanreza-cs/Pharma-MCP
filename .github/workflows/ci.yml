@@ -16,9 +16,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install
-        run: |
-          uv venv --allow-existing .venv
-          uv pip install --python .venv/bin/python -e ".[dev]"
+        run: uv sync --locked --extra dev
       - run: make lint
       - run: make test
 
