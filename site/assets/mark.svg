@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="20 20 160 160" width="160" height="160"><title>Pharma MCP</title>
+  <g transform="translate(20 20)">
+    <defs>
+      <linearGradient id="g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="160" y2="160">
+        <stop offset="0" stop-color="#0EA5A4" />
+        <stop offset="1" stop-color="#0B5F8A" />
+      </linearGradient>
+    </defs>
+    <rect width="160" height="160" rx="38" fill="url(#g)" />
+    <g fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="48" y="58" width="64" height="46" rx="12" />
+      <path d="M66 28 V58 M94 28 V58" />
+      <path d="M80 104 V118 Q80 138 100 138 H130" />
+    </g>
+  </g>
+  </svg>
