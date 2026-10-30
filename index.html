@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pharma MCP: FDA and trial data for any AI assistant</title>
+<meta name="description" content="Pharma MCP gives AI assistants FDA drug labels, adverse event reports, recalls and ClinicalTrials.gov, plus pharmacovigilance signal detection.">
+<link rel="canonical" href="https://faizanreza-cs.github.io/Pharma-MCP/">
+<meta name="author" content="Faizan Reza">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Pharma MCP">
+<meta property="og:title" content="Pharma MCP: FDA and trial data for any AI assistant">
+<meta property="og:description" content="Pharma MCP gives AI assistants FDA drug labels, adverse event reports, recalls and ClinicalTrials.gov, plus pharmacovigilance signal detection.">
+<meta property="og:url" content="https://faizanreza-cs.github.io/Pharma-MCP/">
+<meta property="og:image" content="https://faizanreza-cs.github.io/Pharma-MCP/assets/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pharma MCP: FDA data for any assistant.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@cs_faizan">
+<link rel="icon" href="assets/mark.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/touch-icon.png">
+<link rel="preload" href="assets/outfit-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/styles.css">
+<style>:root{--a:#0B7F7E;--a-50:#F0F6F5;--a-100:#E1EDEC;--a-200:#BED8D7;--a-400:#63A2A1;--pop-1:#EC4899;--pop-2:#F59E0B;--a-ink:#0A7877}</style>
+<script>(function(h){if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&!location.hash)h.classList.add("loading")})(document.documentElement)</script>
+<script src="assets/app.js" defer></script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareSourceCode", "name": "Pharma MCP", "description": "Pharma MCP gives AI assistants FDA drug labels, adverse event reports, recalls and ClinicalTrials.gov, plus pharmacovigilance signal detection.", "url": "https://faizanreza-cs.github.io/Pharma-MCP/", "codeRepository": "https://github.com/faizanreza-cs/Pharma-MCP", "programmingLanguage": "Python", "license": "https://opensource.org/licenses/MIT", "author": {"@type": "Person", "name": "Faizan Reza", "url": "https://github.com/faizanreza-cs", "sameAs": ["https://www.linkedin.com/in/faizanreza", "https://x.com/cs_faizan"]}}</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="loader" aria-hidden="true">
+  <img src="assets/mark.svg" alt="" width="56" height="56">
+  <div class="loader-num">0</div>
+  <div class="loader-bar"><i></i></div>
+  <p class="label">Getting things ready</p>
+</div>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top"><img src="assets/logo.svg" alt="Pharma MCP, back to top" width="130" height="30"></a>
+    <nav aria-label="Sections"><ul class="nav-links"><li><a href="#overview">Overview</a></li><li><a href="#how">How it works</a></li><li><a href="#features">Features</a></li><li><a href="#results">Results</a></li><li><a href="#use">Use it</a></li><li><a href="#faq">FAQ</a></li></ul></nav>
+    <a class="btn btn-dark" href="https://github.com/faizanreza-cs/Pharma-MCP">GitHub <svg class="out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 7h10v10"/> <path d="M7 17 17 7"/></svg></a>
+  </div>
+</header>
+
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <h1 class="hero-title" id="hero-title"><span class="line">FDA data</span> <span class="line">for <span class="outline">any</span></span> <span class="line">assistant.</span></h1>
+      <p class="hero-sub">FDA drug labels, adverse event reports, recalls and ClinicalTrials.gov for any AI assistant, plus pharmacovigilance signal detection.</p>
+      <div class="hero-cta">
+        <a class="btn btn-dark" href="https://github.com/faizanreza-cs/Pharma-MCP">View on GitHub <svg class="go" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/> <path d="m12 5 7 7-7 7"/></svg></a>
+        <a class="btn btn-ghost" href="#results">See the results</a>
+      </div>
+    </div>
+    <div class="hero-scroll" aria-hidden="true"><span class="label">Scroll</span><span class="bar"></span></div>
+    <div class="hero-year"><p class="label">2026</p><strong>Labels. Signals. Trials.</strong></div>
+  </section>
+
+  <section class="overview" id="overview" aria-label="Overview">
+    <div class="wrap"><p class="lit"><span class="w">Ask</span> <span class="w">your</span> <span class="w">assistant</span> <span class="w">which</span> <span class="w">adverse</span> <span class="w">events</span> <span class="w">are</span> <span class="w">most</span> <span class="w">reported</span> <span class="w">for</span> <span class="w">semaglutide,</span> <span class="w">and</span> <span class="w">whether</span> <span class="w">pancreatitis</span> <span class="w">is</span> <span class="w">disproportionately</span> <span class="w">reported.</span> <span class="w">Or</span> <span class="w">ask</span> <span class="w">it</span> <span class="w">to</span> <span class="w">find</span> <span class="w">recruiting</span> <span class="w">phase</span> <span class="w">3</span> <span class="w">trials</span> <span class="w">for</span> <span class="w">type</span> <span class="w">2</span> <span class="w">diabetes.</span> <span class="w">It</span> <span class="w">calls</span> <span class="w">these</span> <span class="w">tools,</span> <span class="w">and</span> <span class="w">every</span> <span class="w">answer</span> <span class="w">links</span> <span class="w">back</span> <span class="w">to</span> <span class="w">the</span> <span class="w">FDA</span> <span class="w">or</span> <span class="w">ClinicalTrials.gov</span> <span class="w">source.</span></p></div>
+  </section>
+
+  <section class="how" id="how" aria-labelledby="how-title">
+    <div class="wrap"><p class="label how-label">How it works</p></div>
+    <div class="pin">
+      <div class="sticky">
+        <div class="steps-track" tabindex="0" role="group" aria-label="How it works, step by step">
+          <article class="step-intro card">
+            <h2 id="how-title">From a question to a sourced answer.</h2>
+            <p>The assistant calls the tools; the server fetches, computes and cites.</p>
+          </article>
+          <article class="step card">
+            <div class="step-tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
+            <svg class="step-ghost" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            <svg class="viz" viewBox="0 0 210 210" aria-hidden="true" focusable="false">
+  <rect x="34" y="58" width="104" height="70" rx="14" class="f-white k-line"/>
+  <rect x="50" y="76" width="58" height="9" rx="4.5" class="f-a200"/>
+  <rect x="50" y="96" width="42" height="9" rx="4.5" class="f-line"/>
+  <circle class="ripple" cx="126" cy="112" r="20"/>
+  <g class="bob"><path d="M126 112 L126 172 L141 157 L153 182 L165 176 L153 151 L174 151 Z" class="f-a"/></g>
+  <rect class="float f-p2" x="160" y="44" width="11" height="11" rx="3"/>
+</svg>
+            <p class="label">01</p>
+            <h3>Ask</h3>
+            <p>A question in plain words</p>
+          </article>
+          <article class="step card">
+            <div class="step-tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+            <svg class="step-ghost" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <svg class="viz" viewBox="0 0 210 210" aria-hidden="true" focusable="false">
+  <circle cx="105" cy="105" r="66" class="k-a200"/>
+  <circle cx="105" cy="105" r="50" class="f-a50"/>
+  <g class="orbit"><circle cx="105" cy="39" r="8" class="f-a"/></g>
+  <g class="orbit b"><circle cx="171" cy="105" r="6.5" class="f-p1"/></g>
+  <g class="orbit c"><circle cx="105" cy="171" r="5.5" class="f-p2"/></g>
+  <circle class="pulse f-a" cx="105" cy="105" r="13"/>
+</svg>
+            <p class="label">02</p>
+            <h3>Call</h3>
+            <p>The assistant picks a tool</p>
+          </article>
+          <article class="step card">
+            <div class="step-tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/> <path d="M2 12h20"/></svg></div>
+            <svg class="step-ghost" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10"/> <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/> <path d="M2 12h20"/></svg>
+            <svg class="viz" viewBox="0 0 210 210" aria-hidden="true" focusable="false">
+  <rect x="55" y="26" width="100" height="140" rx="16" class="f-white k-line"/>
+  <rect x="73" y="54" width="64" height="9" rx="4.5" class="f-a200"/>
+  <rect x="73" y="76" width="50" height="9" rx="4.5" class="f-line"/>
+  <rect x="73" y="98" width="58" height="9" rx="4.5" class="f-line"/>
+  <rect x="73" y="120" width="40" height="9" rx="4.5" class="f-line"/>
+  <rect class="scan" x="44" y="42" width="122" height="5" rx="2.5" fill-opacity=".9" style="fill:var(--a)"/>
+  <rect class="float" x="30" y="150" width="12" height="12" rx="3" style="fill:var(--pop-2)"/>
+  <circle class="float b" cx="174" cy="44" r="5" style="fill:var(--pop-1)"/>
+</svg>
+            <p class="label">03</p>
+            <h3>Fetch</h3>
+            <p>openFDA or ClinicalTrials.gov, politely</p>
+          </article>
+          <article class="step card">
+            <div class="step-tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></svg></div>
+            <svg class="step-ghost" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></svg>
+            <svg class="viz" viewBox="0 0 210 210" aria-hidden="true" focusable="false">
+  <rect class="grow" x="40" y="88" width="24" height="96" rx="12" style="fill:var(--a-200)"/>
+  <rect class="grow" x="76" y="40" width="24" height="144" rx="12" style="fill:var(--a)"/>
+  <rect class="grow" x="112" y="64" width="24" height="120" rx="12" style="fill:var(--pop-1)"/>
+  <rect class="grow" x="148" y="28" width="24" height="156" rx="12" style="fill:var(--pop-2)"/>
+</svg>
+            <p class="label">04</p>
+            <h3>Compute</h3>
+            <p>PRR and ROR with 95% intervals</p>
+          </article>
+          <article class="step card">
+            <div class="step-tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+            <svg class="step-ghost" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/> <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <svg class="viz" viewBox="0 0 210 210" aria-hidden="true" focusable="false">
+  <circle class="pulse f-a50" cx="105" cy="105" r="70"/>
+  <circle cx="105" cy="105" r="48" class="f-a"/>
+  <path class="tick" d="M84 106 L99 121 L127 91"/>
+  <rect class="float f-p2" x="166" y="40" width="12" height="12" rx="3"/>
+  <circle class="float b f-p1" cx="40" cy="160" r="6"/>
+</svg>
+            <p class="label">05</p>
+            <h3>Cite</h3>
+            <p>Every answer links its source</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features" aria-labelledby="features-title">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2 class="sec-title reveal" id="features-title">Six tools, one server.</h2>
+        <p class="reveal" style="--d:.1s">Public FDA and NIH data, in a form an assistant can use.</p>
+      </div>
+      <div class="grid3">
+          <article class="feature card reveal" style="--d:0.00s">
+            <div class="tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/> <path d="M14 2v4a2 2 0 0 0 2 2h4"/> <path d="M10 9H8"/> <path d="M16 13H8"/> <path d="M16 17H8"/></svg></div>
+            <h3>Drug labels</h3>
+            <p>Boxed warning, indications, contraindications, warnings and adverse reactions, with a DailyMed link.</p>
+            <p class="label">01</p>
+          </article>
+          <article class="feature card reveal" style="--d:0.08s">
+            <div class="tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg></div>
+            <h3>Adverse events</h3>
+            <p>The most reported reactions in FAERS, with counts and share of reports, optionally serious only.</p>
+            <p class="label">02</p>
+          </article>
+          <article class="feature card reveal" style="--d:0.16s">
+            <div class="tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></svg></div>
+            <h3>Signal check</h3>
+            <p>PRR and ROR with 95% intervals, Yates chi-squared and the Evans flag for a drug and a reaction.</p>
+            <p class="label">03</p>
+          </article>
+          <article class="feature card reveal" style="--d:0.00s">
+            <div class="tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/> <path d="M12 9v4"/> <path d="M12 17h.01"/></svg></div>
+            <h3>Recalls</h3>
+            <p>Class I, II and III recalls with the reason, status, firm and dates.</p>
+            <p class="label">04</p>
+          </article>
+          <article class="feature card reveal" style="--d:0.08s">
+            <div class="tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="8"/> <path d="m21 21-4.3-4.3"/></svg></div>
+            <h3>Trial search</h3>
+            <p>ClinicalTrials.gov by condition, intervention or sponsor, filtered by status and phase.</p>
+            <p class="label">05</p>
+          </article>
+          <article class="feature card reveal" style="--d:0.16s">
+            <div class="tile"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2v4a2 2 0 0 0 2 2h4"/> <path d="M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3"/> <path d="m9 18-1.5-1.5"/> <circle cx="5" cy="14" r="3"/></svg></div>
+            <h3>Trial details</h3>
+            <p>Summary, eligibility, primary outcomes, enrollment and sponsor for one trial.</p>
+            <p class="label">06</p>
+          </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="results" id="results" aria-labelledby="results-title">
+    <div class="wrap">
+      <div class="panel card">
+        <p class="label">Results</p>
+        <h2 id="results-title">Small, tested<br>and polite.</h2>
+        <p class="note">The tests run offline, against hand-made samples in the documented response shapes. Only the server&#x27;s live calls reach the public APIs.</p>
+        <div class="frame">
+            <div class="metric">
+              <div class="metric-top"><span class="label">01</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></svg></div>
+              <b>PRR ≥ 2</b>
+              <p>plus chi-squared ≥ 4 and at least 3 cases: the Evans screening rule, with 95% intervals.</p>
+            </div>
+            <div class="metric">
+              <div class="metric-top"><span class="label">02</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10 2v7.527a2 2 0 0 1-.211.896L4.72 20.55a1 1 0 0 0 .9 1.45h12.76a1 1 0 0 0 .9-1.45l-5.069-10.127A2 2 0 0 1 14 9.527V2"/> <path d="M8.5 2h7"/> <path d="M7 16h10"/></svg></div>
+              <b>21 tests</b>
+              <p>signal maths checked against hand-computed values, zero cells included, and every tool through a real MCP client.</p>
+            </div>
+            <div class="metric">
+              <div class="metric-top"><span class="label">03</span><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/> <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg></div>
+              <b>120,000</b>
+              <p>openFDA requests a day with a free API key, against 1,000 without.</p>
+            </div>
+        </div>
+        <figure class="chart">
+          <div class="t22-wrap">
+            <table class="t22">
+              <caption class="sr-only">The 2 by 2 table signal_check builds from four FAERS counts</caption>
+              <thead><tr><td></td><th scope="col">Reaction</th><th scope="col">Other reactions</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Drug</th><td>a</td><td>b</td></tr>
+                <tr><th scope="row">Other drugs</th><td>c</td><td>d</td></tr>
+              </tbody>
+            </table>
+            <div class="formulas">
+              <p><b>PRR</b> = [a / (a + b)] / [c / (c + d)]</p>
+              <p><b>ROR</b> = ad / bc, with log-normal 95% intervals</p>
+              <p><b>Signal</b> when PRR ≥ 2, chi-squared ≥ 4 and a ≥ 3</p>
+            </div>
+          </div>
+          <figcaption>How <code>signal_check</code> reads four FAERS counts (Evans et al., 2001).
+            A zero cell gets the Haldane-Anscombe correction.</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="band"><div class="wrap band-grid"><div><b>openFDA</b><span class="label">Labels, events, recalls</span></div><div><b>FAERS</b><span class="label">Adverse event reports</span></div><div><b>CT.gov</b><span class="label">Clinical trials, v2</span></div></div></div>
+  </section>
+
+  <section class="uses" id="uses" aria-labelledby="uses-title">
+    <input class="sr-only" type="checkbox" id="pause-uses">
+    <div class="wrap uses-head">
+      <div>
+        <h2 class="sec-title reveal" id="uses-title">For questions<br>safety teams ask.</h2>
+        <p class="uses-intro reveal" style="--d:.1s">Label, safety and trial questions, answered with a link to the source.</p>
+      </div>
+      <label class="pause" for="pause-uses"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="14" y="4" width="4" height="16" rx="1"/> <rect x="6" y="4" width="4" height="16" rx="1"/></svg> Pause</label>
+    </div>
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="set">
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/> <path d="M14 2v4a2 2 0 0 0 2 2h4"/> <path d="M10 9H8"/> <path d="M16 13H8"/> <path d="M16 17H8"/></svg>
+              <h3>A one-page safety brief</h3>
+              <p>All six tools combined, with sources and limits.</p>
+              <p class="for">For drug safety teams</p>
+              <p class="label">01</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></svg>
+              <h3>Signal screening</h3>
+              <p>Is a reaction reported more than expected?</p>
+              <p class="for">For pharmacovigilance</p>
+              <p class="label">02</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/> <path d="M12 9v4"/> <path d="M12 17h.01"/></svg>
+              <h3>Recall watch</h3>
+              <p>Recalls by class, with the reason.</p>
+              <p class="for">For quality teams</p>
+              <p class="label">03</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18h8"/> <path d="M3 22h18"/> <path d="M14 22a7 7 0 1 0 0-14h-1"/> <path d="M9 14h2"/> <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/> <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></svg>
+              <h3>Trial landscape</h3>
+              <p>Recruiting trials by condition, sponsor and phase.</p>
+              <p class="for">For clinical strategy</p>
+              <p class="label">04</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v14"/> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+              <h3>Label look-ups</h3>
+              <p>Boxed warnings and indications, with a DailyMed link.</p>
+              <p class="for">For medical information</p>
+              <p class="label">05</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/> <path d="M4 6h.01"/> <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/> <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/> <path d="M12 18h.01"/> <path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/> <circle cx="12" cy="12" r="2"/> <path d="m13.41 10.59 5.66-5.66"/></svg>
+              <h3>Competitor watch</h3>
+              <p>A rival&#x27;s trials and safety reports.</p>
+              <p class="for">For market analysts</p>
+              <p class="label">06</p>
+            </article>
+        </div>
+        <div class="set dup" aria-hidden="true">
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/> <path d="M14 2v4a2 2 0 0 0 2 2h4"/> <path d="M10 9H8"/> <path d="M16 13H8"/> <path d="M16 17H8"/></svg>
+              <h3>A one-page safety brief</h3>
+              <p>All six tools combined, with sources and limits.</p>
+              <p class="for">For drug safety teams</p>
+              <p class="label">01</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M18 7V5a1 1 0 0 0-1-1H6.5a.5.5 0 0 0-.4.8l4.5 6a2 2 0 0 1 0 2.4l-4.5 6a.5.5 0 0 0 .4.8H17a1 1 0 0 0 1-1v-2"/></svg>
+              <h3>Signal screening</h3>
+              <p>Is a reaction reported more than expected?</p>
+              <p class="for">For pharmacovigilance</p>
+              <p class="label">02</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/> <path d="M12 9v4"/> <path d="M12 17h.01"/></svg>
+              <h3>Recall watch</h3>
+              <p>Recalls by class, with the reason.</p>
+              <p class="for">For quality teams</p>
+              <p class="label">03</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 18h8"/> <path d="M3 22h18"/> <path d="M14 22a7 7 0 1 0 0-14h-1"/> <path d="M9 14h2"/> <path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/> <path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/></svg>
+              <h3>Trial landscape</h3>
+              <p>Recruiting trials by condition, sponsor and phase.</p>
+              <p class="for">For clinical strategy</p>
+              <p class="label">04</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 7v14"/> <path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></svg>
+              <h3>Label look-ups</h3>
+              <p>Boxed warnings and indications, with a DailyMed link.</p>
+              <p class="for">For medical information</p>
+              <p class="label">05</p>
+            </article>
+            <article class="use card">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M19.07 4.93A10 10 0 0 0 6.99 3.34"/> <path d="M4 6h.01"/> <path d="M2.29 9.62A10 10 0 1 0 21.31 8.35"/> <path d="M16.24 7.76A6 6 0 1 0 8.23 16.67"/> <path d="M12 18h.01"/> <path d="M17.99 11.66A6 6 0 0 1 15.77 16.67"/> <circle cx="12" cy="12" r="2"/> <path d="m13.41 10.59 5.66-5.66"/></svg>
+              <h3>Competitor watch</h3>
+              <p>A rival&#x27;s trials and safety reports.</p>
+              <p class="for">For market analysts</p>
+              <p class="label">06</p>
+            </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="use-it" id="use" aria-labelledby="use-title">
+    <div class="wrap">
+      <h2 class="center-title reveal" id="use-title">Run it, or have it built.</h2>
+      <div class="plans">
+        <article class="plan reveal">
+          <div class="plan-head"><h3>Run it yourself</h3><span class="badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="16 18 22 12 16 6"/> <polyline points="8 6 2 12 8 18"/></svg> Open source</span></div>
+          <p class="plan-text">Free under the MIT license. Or add it to any MCP client&#x27;s config with uvx. An openFDA key is optional.</p>
+          <ol class="cmds">
+            <li>
+              <div class="cmd-head"><p class="cmd-label">Clone</p><button class="copy" type="button" hidden>Copy</button></div>
+              <div class="cmd"><pre><code>git clone https://github.com/faizanreza-cs/pharma-mcp &amp;&amp; cd pharma-mcp</code></pre></div>
+            </li>
+            <li>
+              <div class="cmd-head"><p class="cmd-label">Install</p><button class="copy" type="button" hidden>Copy</button></div>
+              <div class="cmd"><pre><code>make setup</code></pre></div>
+            </li>
+            <li>
+              <div class="cmd-head"><p class="cmd-label">Run the server</p><button class="copy" type="button" hidden>Copy</button></div>
+              <div class="cmd"><pre><code>make run     # stdio
+make http    # streamable HTTP</code></pre></div>
+            </li>
+          </ol>
+          <div class="plan-foot"><a class="btn btn-accent btn-block" href="https://github.com/faizanreza-cs/Pharma-MCP">View on GitHub <svg class="go" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/> <path d="m12 5 7 7-7 7"/></svg></a></div>
+        </article>
+        <article class="plan featured reveal" style="--d:.1s">
+          <div class="plan-head"><h3>Work with me</h3><span class="badge"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/> <rect width="20" height="14" x="2" y="6" rx="2"/></svg> For teams</span></div>
+          <p class="plan-text">I build MCP servers, data integrations and AI agents like this one for pharma teams.</p>
+          <ul class="checks"><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>MCP servers for your internal data and APIs</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Pharmacovigilance and clinical trial analytics</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Assistants that cite their sources</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20 6 9 17l-5-5"/></svg><span>Integrations that respect rate limits and errors</span></li></ul>
+          <p class="callout"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m11 17 2 2a1 1 0 1 0 3-3"/> <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/> <path d="m21 3 1 11h-2"/> <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/> <path d="M3 4h8"/></svg> Open to freelance projects and full-time roles.</p>
+          <div class="plan-foot">
+            <a class="btn btn-dark btn-block" href="mailto:faizanreza01@gmail.com?subject=Pharma%20MCP">Email me <svg class="go" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/> <path d="m12 5 7 7-7 7"/></svg></a>
+            <div class="socials">
+              <a class="btn btn-ghost" href="https://www.linkedin.com/in/faizanreza"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/> <rect width="4" height="12" x="2" y="9"/> <circle cx="4" cy="4" r="2"/></svg> LinkedIn</a>
+              <a class="btn btn-ghost" href="https://x.com/cs_faizan"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"/></svg> <span class="sr-only">Follow on</span> X</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="wrap">
+      <h2 class="center-title reveal" id="faq-title">A few questions</h2>
+      <div class="faq-list">
+        <details class="card reveal" open>
+          <summary>Which assistants can use it?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer"><p>Any MCP-compatible client, from desktop assistants to IDE agents. Add it to the client&#x27;s MCP server config with uvx, or run it over stdio or streamable HTTP.</p></div>
+        </details>
+        <details class="card reveal">
+          <summary>Is a signal proof that a drug causes an event?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer"><p>No. FAERS holds voluntary reports, and a signal is a statistical association that deserves review. The server tells the assistant to present results that way, never as medical advice.</p></div>
+        </details>
+        <details class="card reveal">
+          <summary>Do I need an API key?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer"><p>No. An openFDA key is optional and free; it raises the limit from 1,000 to 120,000 requests a day.</p></div>
+        </details>
+        <details class="card reveal">
+          <summary>What happens when nothing matches?<span class="pm" aria-hidden="true"></span></summary>
+          <div class="answer"><p>openFDA answers 404 when nothing matches, and the server returns an empty list instead of an error. Bad inputs return a clear message to the model.</p></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" aria-labelledby="cta-title">
+    <div class="wrap">
+      <div class="cta-panel reveal">
+        <h2 id="cta-title">Need your data in your team&#x27;s assistant?</h2>
+        <p>I can build an MCP server for your internal data, or extend this one for your team.</p>
+        <div class="cta-actions">
+          <a class="btn btn-white" href="mailto:faizanreza01@gmail.com?subject=Pharma%20MCP">Email me <svg class="go" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14"/> <path d="m12 5 7 7-7 7"/></svg></a>
+          <a class="btn btn-line" href="https://github.com/faizanreza-cs/Pharma-MCP">View on GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="assets/logo.svg" alt="Pharma MCP" width="139" height="32" loading="lazy">
+        <p>FDA drug labels, adverse event reports, recalls and ClinicalTrials.gov for any AI assistant, plus pharmacovigilance signal detection.</p>
+      </div>
+      <div>
+        <h2 class="label">Project</h2>
+        <ul>
+          <li><a href="https://github.com/faizanreza-cs/Pharma-MCP">Source on GitHub</a></li>
+          <li><a href="https://github.com/faizanreza-cs/Pharma-MCP#readme">README</a></li>
+          <li><a href="https://github.com/faizanreza-cs/Pharma-MCP/blob/main/LICENSE">License (MIT)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="label">More projects</h2>
+        <ul><li><a href="https://pdlwatch.pages.dev/">PDLwatch</a></li><li><a href="https://pharmapulse.pages.dev/">PharmaPulse</a></li><li><a href="https://shelfsense-ai.pages.dev/">ShelfSense</a></li><li><a href="https://retail-media-lab.pages.dev/">Retail Media Lab</a></li><li><a href="https://agentkit-enterprise.pages.dev/">AgentKit Enterprise</a></li><li><a href="https://docflow-agent.pages.dev/">DocFlow Agent</a></li><li><a href="https://ragdesk.pages.dev/">RAGdesk</a></li></ul>
+      </div>
+      <div>
+        <h2 class="label">Contact</h2>
+        <ul>
+          <li><a href="mailto:faizanreza01@gmail.com">Email</a></li>
+          <li><a href="https://www.linkedin.com/in/faizanreza">LinkedIn</a></li>
+          <li><a href="https://x.com/cs_faizan">X</a></li>
+          <li><a href="https://github.com/faizanreza-cs">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <p>© 2026 Faizan Reza</p>
+      <p>Icons: <a href="https://lucide.dev">Lucide</a>. Font: Outfit. <a href="assets/LICENSES.txt">Licenses</a></p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
